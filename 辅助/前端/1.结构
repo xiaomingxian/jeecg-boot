@@ -17,3 +17,16 @@
     config：路由设置
 
     mixins:混入
+
+    store:存储
+        [三种方式：
+            本地存储[ls==>vue.ls](cookie级别,只能存储字符串不能存对象==>不同页面传值)
+                修改值mutations(同步)/actions(异步)
+            session存储
+            vuex存储]
+
+    utils:通用js包
+
+    views配置：vue.config.js中?
+
+    加组件：package.json 也可以使用命令 install    yarn update将所有组件版本更到最新版本
