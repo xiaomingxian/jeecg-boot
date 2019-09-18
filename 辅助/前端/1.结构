@@ -1,0 +1,19 @@
+前端
+    yarn install加组件
+    build 打包 .dist编译后的结果
+    lint 检测
+
+
+
+架构
+    public包下 index.html
+    前端入口  App.Vue + main.js 创建vue实例  main.js store与vue.js存储东西
+    通用接口：api下
+
+    asset:静态文件  pic/css...
+
+    components:组件
+
+    config：路由设置
+
+    mixins:混入
