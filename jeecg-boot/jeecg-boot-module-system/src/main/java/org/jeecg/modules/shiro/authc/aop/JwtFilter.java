@@ -47,7 +47,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		String token = httpServletRequest.getHeader(DefContants.X_ACCESS_TOKEN);
 
 		JwtToken jwtToken = new JwtToken(token);
-		// 提交给realm进行登入，如果错误他会抛出异常并被捕获
+		// 提交给realm进行登入，如果错误他会抛出异常并被捕获//shiro的
 		getSubject(request, response).login(jwtToken);
 		// 如果没有抛出异常则代表登入成功，返回true
 		return true;

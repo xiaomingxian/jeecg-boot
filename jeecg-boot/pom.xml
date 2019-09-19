@@ -16,20 +16,21 @@
 	<modules>
 		<module>jeecg-boot-base-common</module>
 		<module>jeecg-boot-module-system</module>
-	</modules>
+        <module>yewu</module>
+    </modules>
 	
-	<distributionManagement>
-	  	<repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>http://maven.jeecg.com:8090/nexus/content/repositories/jeecg</url>
-        </repository>
-        <snapshotRepository>
-	        <id>jeecg-snapshots</id>
-            <name>jeecg Snapshot Repository</name>
-            <url>http://maven.jeecg.com:8090/nexus/content/repositories/snapshots/</url>
-	    </snapshotRepository>
-	</distributionManagement>
+	<!--<distributionManagement>-->
+	  	<!--<repository>-->
+            <!--<id>jeecg</id>-->
+            <!--<name>jeecg Repository</name>-->
+            <!--<url>http://maven.jeecg.com:8090/nexus/content/repositories/jeecg</url>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+	        <!--<id>jeecg-snapshots</id>-->
+            <!--<name>jeecg Snapshot Repository</name>-->
+            <!--<url>http://maven.jeecg.com:8090/nexus/content/repositories/snapshots/</url>-->
+	    <!--</snapshotRepository>-->
+	<!--</distributionManagement>-->
 	
 	<repositories>
 		<repository>
