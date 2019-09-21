@@ -61,6 +61,7 @@
 
 <script>
   import DataLogModal from './modules/DataLogModal'
+  //公共代码--从混入文件夹下获取
   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
   import JEllipsis from "@/components/jeecg/JEllipsis";
 
@@ -79,6 +80,7 @@
           {
             title: '表名',
             align: 'center',
+            //返回的实体属性
             dataIndex: 'dataTable'
           }, {
             title: '数据ID',

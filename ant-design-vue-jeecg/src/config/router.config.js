@@ -1,5 +1,6 @@
-import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
+import {BlankLayout, PageView, RouteView, TabLayout, UserLayout} from '@/components/layouts'
 
+//路由配置
 /**
  * 走菜单，走权限控制
  * @type {[null,null]}

@@ -97,7 +97,7 @@
 </template>
 
 <script>
-  import { getAction } from '@/api/manage'
+  import {getAction} from '@/api/manage'
   import JeecgOrderDMainModal from '@/views/jeecg/tablist/form/JeecgOrderDMainModal'
   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
 
@@ -197,6 +197,7 @@
             title: '操作',
             dataIndex: 'action',
             align: "center",
+            //卡槽[scopedSlots:范围槽]
             scopedSlots: {customRender: 'action'},
           }],
         // 分页参数

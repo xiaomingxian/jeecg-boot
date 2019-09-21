@@ -5,6 +5,9 @@
     <p v-if="bol">{{s}}</p>
     <p v-for="i in list">{{i.v}}</p>
 
+    <!--引入表单-->
+    <!--<my-hello></my-hello>-->
+    <my-hello ref="modalForm" @ok="modalFormOk"></my-hello>
   </div>
 </template>
 
