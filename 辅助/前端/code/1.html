@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<script src="lib/vue.js"></script>
+<body>
+<div id="app">
+    <p>---{{msg}}----</p><!--有闪烁问题，前后可以放任意内容-->
+    <p v-cloak>{{msg}}</p><!--v-clock解决插值表达式闪烁的问题[网速慢的时候，请求js慢,会先显示{{}}]，在style中设置属性display:none不显示-->
+    <p v-text="msg">----</p><!--没有闪烁问题，前后放内容会被覆盖[网速慢的时候放置的内从会显示，js加载到的时候会被覆盖]-->
+    <!--{{}}与v-text不会解析 html标签 v-html会解析-->
+    {{msg2}}
+    <p v-text="msg2"></p>
+    <p v-html="msg2"></p>
+    <!--属性绑定 v-bind-->
+    <input type="button" value="按钮" v-bind:title="title+'123'"/><!--可以简写为:title=''-->
+
+    <!--事件绑定 v-on简写@-->
+    <input type="button" value="点击事件" v-on:click="show"/>
+    <input type="button" value="点击事件简写" @click="show"/>
+</div>
+
+<script>
+    //1.创建vue实例，当导入vue包后，内存中就多了一个vue构造函数 #这个vue实例是mvvm中的 vm调度者
+    //vm会监听自身data 的改变 一旦改变会应用到显示区域【只需要关心数据，不需要考虑如何渲染到页面，减少dom操作】
+    var vue = new Vue({
+        el: '#app',//vue对象要控制页面上id为app的的区域
+        data: {
+            msg: 'vue学习',
+            msg2: '<h1>html标签解析测试</h1>',
+            title: '属性绑定测试'
+
+        },
+        methods: {
+            show: function () {
+                alert('点击事件')
+            }
+        }
+
+    })
+
+
+</script>
+
+</body>
+</html>
