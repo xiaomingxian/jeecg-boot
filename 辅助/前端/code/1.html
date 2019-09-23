@@ -25,6 +25,8 @@
     <!--事件绑定 v-on简写@-->
     <input type="button" value="点击事件" v-on:click="show"/>
     <input type="button" value="点击事件简写" @click="show"/>
+    <input type="button" value="跑马灯测试" @click="lang">
+    {{langstr}}
 </div>
 
 <script>
@@ -35,13 +37,35 @@
         data: {
             msg: 'vue学习',
             msg2: '<h1>html标签解析测试</h1>',
-            title: '属性绑定测试'
+            title: '属性绑定测试',
+            langstr: '我是跑马灯'
 
         },
         methods: {
             show: function () {
                 alert('点击事件')
+            },
+            lang() {
+                //this的指向问题：使用function定义的函数，this的指向随着调用环境的变化而变化的，而箭头函数中的this指向是固定不变的，一直指向的是定义函数的环境。内部的this与外部的this一致
+
+
+                //method1：箭头函数
+                // setInterval(() => {
+                //     var start = this.langstr.substring(0, 1)
+                //     var end = this.langstr.substring(1)
+                //     this.langstr = end + start
+                // }, 400)
+
+                //method2：变量提升
+                var this_ = this
+                setInterval(() => {
+                    var start = this_.langstr.substring(0, 1)
+                    var end = this_.langstr.substring(1)
+                    this.langstr = end + start
+                }, 400)
+
             }
+
         }
 
     })
