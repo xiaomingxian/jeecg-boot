@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础</title>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+
+    .out {
+        height: 150px;
+        background-color: greenyellow;
+    }
+
+    .middle {
+        padding: 40px;
+        background-color: indianred;
+    }
+</style>
+<script src="lib/vue.js"></script>
+<body>
+<div id="app">
+    <p>---{{msg}}----</p><!--有闪烁问题，前后可以放任意内容-->
+    <p v-cloak>{{msg}}</p><!--v-clock解决插值表达式闪烁的问题[网速慢的时候，请求js慢,会先显示{{}}]，在style中设置属性display:none不显示-->
+    <p v-text="msg">----</p><!--没有闪烁问题，前后放内容会被覆盖[网速慢的时候放置的内从会显示，js加载到的时候会被覆盖]-->
+    <!--{{}}与v-text不会解析 html标签 v-html会解析-->
+    {{msg2}}
+    <p v-text="msg2"></p>
+    <p v-html="msg2"></p>
+    <!--属性绑定 v-bind-->
+    <input type="button" value="按钮" v-bind:title="title+'123'"/><!--可以简写为:title=''-->
+
+    <!--事件绑定 v-on简写@-->
+    <input type="button" value="点击事件" v-on:click="show"/>
+    <input type="button" value="点击事件简写" @click="show"/>
+    <input type="button" value="跑马灯测试" @click="lang">
+    <input type="button" value="停止跑马灯" @click="stop">
+    <br>
+    {{langstr}}
+    <hr>
+    <!--事件修饰符-->
+    <div class="out" @click="out">
+        <!--内部事件触发外部事，称为冒泡现象,stop组织冒泡现象-->
+        <!--<input value="内部按钮" type="button" @click="inner"/>-->
+        <input value="内部按钮" type="button" @click.stop="inner"/>
+
+    </div>
+    <!--阻止事件默认行为[表单的提交行为也可以阻止]-->
+    <!--<a href="http://www.baidu.com" @click="prevent_">阻止事件默认行为(eg:阻止跳转事件)</a>-->
+    <a href="http://www.baidu.com" @click.prevent="prevent_">阻止事件默认行为(eg:阻止跳转事件)</a>
+    <!--捕获-->
+    <div class="out" @click.capture="out">
+        <input type="button" value="内部按钮" @click="inner">
+    </div>
+    <!--self 只有触发自己的时候才会触发，被动触发不算-->
+    <br>
+    <div class="out" @click.self="out">
+        <input type="button" value="内部按钮" @click="inner">
+    </div>
+    <!--once-->
+    <input value="once测试" type="button" @click.once="once_">
+    <!--事件行为串联-->
+    <br>
+    <a href="http://www.baidu.com" @click.prevent.once='event_more'>事件行为串联</a><!--阻止默认跳转行为但是只阻止一次,先后顺序无所谓-->
+    <br>
+    <!--.self .stop都可以阻止冒泡行为 但是 .self只会阻止自身的冒泡行为 .stop加在哪一层冒泡行为就停止到哪一层-->
+    <div class="out" @click.stop="out">
+        <div class="middle" @click.self="middle">
+            <input type="button" value="内部按钮" @click="inner">
+        </div>
+    </div>
+</div>
+
+<script>
+    //1.创建vue实例，当导入vue包后，内存中就多了一个vue构造函数 #这个vue实例是mvvm中的 vm调度者
+    //vm会监听自身data 的改变 一旦改变会应用到显示区域【只需要关心数据，不需要考虑如何渲染到页面，减少dom操作】
+    var vm = new Vue({//mvvm 中的vm
+        el: '#app',//vue对象要控制页面上id为app的的区域
+        data: {
+            msg: 'vue学习',
+            msg2: '<h1>html标签解析测试</h1>',
+            title: '属性绑定测试',
+            langstr: '我是跑马灯',
+            interId: null
+
+        },
+        methods: {
+            show: function () {
+                alert('点击事件')
+            },
+            lang() {
+
+                console.log(this.interId)
+
+                //防止多次点击----多次点击会停止不下来 [因为this.interId只记录了一个定时任务的id(最后一次[另一种解决思路-将定时任务id放入集合中])]
+                if (this.interId != null) return
+                //this的指向问题：使用function定义的函数，this的指向随着调用环境的变化而变化的，而箭头函数中的this指向是固定不变的，一直指向的是定义函数的环境。内部的this与外部的this一致
+
+
+                //method1：箭头函数
+                // setInterval(() => {
+                //     var start = this.langstr.substring(0, 1)
+                //     var end = this.langstr.substring(1)
+                //     this.langstr = end + start
+                // }, 400)
+
+                //method2：变量提升
+                var this_ = this
+                this.interId = setInterval(() => {
+                    var start = this_.langstr.substring(0, 1)
+                    var end = this_.langstr.substring(1)
+                    this.langstr = end + start
+                }, 400)
+
+            },
+            stop() {
+                clearInterval(this.interId)
+                this.interId = null//重新赋值null
+            },
+            out() {
+                console.log('out...')
+            },
+            middle() {
+                console.log('middle...')
+            },
+            inner() {
+                console.log('inner...')
+            },
+            prevent_() {
+                console.log('阻止事件默认行为')
+            },
+            once_() {
+                console.log('事件只触发一次...')
+            },
+            event_more() {
+                console.log('事件行为串联')
+            }
+
+        }
+
+    })
+
+
+</script>
+
+</body>
+</html>

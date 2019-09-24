@@ -1,1 +1,5 @@
-mvvm
+mvvm：m(model) v(view) vm(view与model交互)
+冒泡：从内到外
+捕获：从外到内
+
+
