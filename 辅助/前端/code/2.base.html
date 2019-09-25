@@ -8,7 +8,19 @@
 <div id="app2">
     {{msg}}<br>
     <!--v-model双向绑定 -->
-    <input type="text" v-model="msg">
+    <input type="text" v-model="msg"><br>
+    <!--计算器模拟-->
+    <input type="text" v-model="n1">
+    <select v-model="opt">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" v-model="n2">
+    <input type="button" value="=" @click="caculate">
+    <input type="text" v-model="res"/>
+
 
 </div>
 <script src="lib/vue.js"></script>
@@ -16,9 +28,31 @@
     new Vue({
         el: '#app2',
         data: {
-            msg: '111'
+            msg: '111',
+            n1: 0,
+            n2: 0,
+            res: 0,
+            opt: '+'
         },
-        methods: {}
+        methods: {
+            caculate() {
+                switch (this.opt) {
+                    case '+':
+                        this.res = parseInt(this.n1) + parseInt(this.n2)
+                        break;
+                    case '-':
+                        this.res = parseInt(this.n1) - parseInt(this.n2)
+                        break;
+                    case '*':
+                        this.res = parseInt(this.n1) * parseInt(this.n2)
+                        break;
+                    case '/':
+                        this.res = parseInt(this.n1) / parseInt(this.n2)
+                        break;
+                }
+
+            }
+        }
     })
 </script>
 </body>

@@ -59,9 +59,9 @@
     <div class="out" @click.self="out">
         <input type="button" value="内部按钮" @click="inner">
     </div>
-    <!--once--z
+    <!--once-->
     <input value="once测试" type="button" @click.once="once_">
-    <!--事件行为串联-->
+    <!--事件行为串联&ndash;&gt;-->
     <br>
     <a href="http://www.baidu.com" @click.prevent.once='event_more'>事件行为串联</a><!--阻止默认跳转行为但是只阻止一次,先后顺序无所谓-->
     <br>

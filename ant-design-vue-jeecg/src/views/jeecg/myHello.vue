@@ -7,7 +7,14 @@
 
     <!--引入表单-->
     <!--<my-hello></my-hello>-->
-    <my-hello ref="modalForm" @ok="modalFormOk"></my-hello>
+    <!--<my-hello ref="modalForm" @ok="modalFormOk"></my-hello>-->
+
+    <!--input test-->
+    <a-input placeholder="请输入内容" v-model="msg"></a-input>
+    <!--单向绑定，通过事件来实现双向绑定-->
+    <a-input placeholder="单向绑定" defaultValue="msg" @change="double_bind"></a-input>
+
+
   </div>
 </template>
 
@@ -35,6 +42,11 @@
             this.mm = res.result
           }
         })
+      },
+      double_bind(e) {
+        //e:回掉参数
+        this.msg = e.target.value
+
       }
     },
     //页面初始化的时候就执行   dom对象还没有加载完毕
