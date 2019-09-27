@@ -90,7 +90,7 @@
           fileUpload: 'sys/common/upload'
         },
         previewImage: false,
-        previewVisible: true,
+        previewVisible: false,
         fileList: [
           {
             uid: 1,
@@ -108,7 +108,6 @@
         var url = '/yw/ywTest'
         getAction(url).then((res) => {
           if (res.success) {
-            console.log("-----------log test -----------")
             this.msg = res.result
             this.mm = res.result
           }
@@ -125,8 +124,9 @@
         this.previewVisible = true
       },
       handleChange(info) {
+        console.log('-=-=-=-=-='+this.fileUpload)
         if (info.file.status != 'uploading') {
-          console.log(info.file, info.fileList)
+          console.log('=======-=-=-=-=-=-=-=' + info.file, info.fileList)
         }
         if (info.file.status == 'done') {
           this.$message.success(`${info.file.name} 文件上传成功`)

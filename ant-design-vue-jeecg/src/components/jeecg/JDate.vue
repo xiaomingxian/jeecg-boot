@@ -10,6 +10,7 @@
   />
 </template>
 <script>
+  //<a-date-picker 需要依赖 moment 时间处理
   import moment from 'moment'
   export default {
     name: 'JDate',

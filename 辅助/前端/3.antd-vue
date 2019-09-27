@@ -1,0 +1,1 @@
+this.$emit('change', dateStr);  #子组件向父组件传值[子组件:import到的组件]
