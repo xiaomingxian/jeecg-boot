@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="demoApp">
+
+    <div class='panel panel-primary'>
+        <div class="panel-heading">
+            <h3 class='panel-title'>添加品牌</h3>
+        </div>
+        <div class="panel-body form-inline">
+            <!--一行css form-inline-->
+            <label>
+                id:<input type="text" class="form-control" v-model="id">
+            </label>
+            <label>
+                <!--@keyup.enter针对回车键的抬起事件，也可以自定义按键-->
+                <!--名字:<input type="text" class="form-control" v-model="name" @keyup.enter="add">-->
+                名字:<input type="text" class="form-control" v-model="name" @keyup.ll="add">
+            </label>
+            <input type="button" value="添加" class="btn btn-primary" @click="add">
+            关键字<input type="text" v-model="keywords" class="form-control" @mouseleave="search(keywords)">
+        </div>
+    </div>
+
+    <div class=""></div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <th>id</th>
+        <th>名字</th>
+        <th>创建时间</th>
+        <th>操作</th>
+        </thead>
+        <tbody>
+        <!--写死的数据-->
+        <!--<tr v-for="item in list" :key="item.id">-->
+        <!--动态数据根据方法返回 -->
+        <tr v-for="item in search(keywords)" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.createTime | dateFilter('yyyy-mm-dd')}}</td>
+            <td>{{item.createTime | dateFilter('')}}</td>
+            <td>
+                <input type="button" value="删除" @click="del(item.id)" class="btn btn-primary">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+<script>
+
+    //自定义按键
+    Vue.config.keyCodes.ll=13
+
+
+    //时间过滤器---第一个参数取值 为{{data|methodName}}  | 前面的数据
+    Vue.filter('dateFilter', function (dateStr, parten = 'yyyy') {
+        var date = new Date(dateStr)
+        var year = date.getFullYear();
+        var mounth = date.getMonth() + 1;
+        var day = date.getDate()
+
+        // return year + '年' + mounth + '月' + day + '日'
+        //模板字符串
+        if (parten && parten.toLowerCase() === 'yyyy-mm-dd') {
+            return `${year}年${mounth}月${day}日`
+        } else {
+            var hh = date.getHours()
+            var mm = date.getMinutes()
+            var ss = date.getSeconds()
+            return `${year}年${mounth}月${day}日 ${hh}:${mm}:${ss}`
+
+        }
+
+    })
+
+
+    var app = new Vue({
+        el: '#demoApp',
+        data: {
+            id: '',
+            name: '',
+            keywords: '',
+            list: [
+                {id: 1, name: '奔驰', createTime: new Date()},
+                {id: 2, name: '宝马', createTime: new Date()}
+            ]
+
+        },
+        methods: {
+            add() {
+                console.log('键盘码：',Vue.config.keyCodes.enter)
+                obj = {id: this.id, name: this.name, createTime: new Date()}
+                this.list.push(obj)
+                this.id = this.name = ''
+            }, del(id) {
+                //遍历集合找到对应匀速删除
+                // this.list.some((item, index) => {
+                //     if (item.id == id) {
+                //         this.list.splice(index, 1)//splice(索引,元素个数,要添加的元素)
+                //         //在数组的some 方法中 如果return true 就会立即终止这个数组的后续循环
+                //         return true
+                //     }
+                // })
+                //    method2    查找索引-通过索引删除
+                var index = this.list.findIndex(item => {
+                    if (item.id == id) {
+                        return true
+                    }
+                })
+                this.list.splice(index, 1)
+            },
+            search(keywords) {
+                //遍历原集合--进行元素删选，组成新结合，返回
+                var newList = []
+
+                //method 1
+                // this.list.forEach(item => {
+                //     if (item.name.indexOf(keywords) >= 0) {
+                //         newList.push(item)
+                //     }
+                // })
+
+
+                //    method2 filter
+                this.list.filter(item => {
+                    if (item.name.includes(keywords)) {
+                        newList.push(item)
+                    }
+                })
+
+                return newList
+
+            }
+
+
+        }
+    })
+
+
+</script>
+
+
+</html>

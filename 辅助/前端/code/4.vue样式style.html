@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>style样式</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="styleApp">
+
+    <!--样式带-得加''-->
+    <h1 :style="{color: 'red','font-weight':200}">行内[内联样式]</h1>
+    <h1 :style="styleObj">data中定义</h1>
+    <h1 :style="[styleObj,styleObj2]">数组多属性</h1>
+</div>
+<script>
+    var app = new Vue({
+        el: '#styleApp',
+        data() {
+            return {
+                styleObj: {color: 'red', 'font-weight': 100},
+                styleObj2: {'font-style': 'italic'}
+            };
+        }, methods: {}
+    })
+
+</script>
+
+</body>
+</html>

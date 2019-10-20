@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<div id="forApp">
+    <p>{{list[0]}}</p>
+    <p v-for="item,index in list">
+        索引：{{index}},元素：{{item}}
+    </p>
+    <hr>
+    <h4>动态数组</h4>
+    <p v-for="item,index in objlist">
+        索引：{{index}},元素：{{item}}
+    </p>
+    <hr>
+    <h4>遍历对象属性</h4>
+    <p v-for="v,k,i in obj">
+        index{{i}},key:{{k}},val:{{v}}
+    </p>
+    <hr>
+    <h4>迭代数字</h4>
+    <input v-for="n,i in 10" :value="'index:'+i+'val:'+n" width="2px"></input>
+    <hr>
+    <h4>key存在的问题</h4>
+    <div>
+        <label>choice<input type="text" v-model="id"></label>
+        <label>name<input type="text" v-model="name"></label>
+        <input type="button" value="add" @click="add()">
+    </div>
+    <!--key记录选中的id 不实用会发生记录偏移现象-->
+    <p v-for="v,i in keyObj" :key="v.id">
+        <input type="checkbox"> id:{{v.id}}---val:{{v.name}}
+    </p>
+    <hr>
+    <h4>v-if/v-show</h4>
+    <!--v-if：每次都会删除或创建元素///v-show不会重新进行dom元素的删除与创建，只是切换 display:none样式-->
+    <input type="button" value="切换" @click="flag=!flag"/>
+    <p v-if="flag">v-if</p>
+    <p v-show="flag">v-show</p>
+
+</div>
+<script>
+    var app = new Vue({
+        el: '#forApp',
+        data: {
+            flag: true,
+            id: '',
+            name: '',
+            list: [1, 2, 3, 4, 'five', 'six'],
+            objlist: [{name: 'tom', age: 10}, {name: 'jerry', color: 'yellow'}, {address: 'America'}],
+            obj: {name: 'tom', age: 18, color: 'blue'},
+            keyObj: [{id: 0, name: '中国'},
+                {id: 1, name: '美国'},
+                {id: 2, name: '日本'},
+                {id: 3, name: '法国'}
+            ]
+        },
+        methods: {
+            add() {
+                // this.keyObj.push({id: this.id, name: this.name})
+                this.keyObj.unshift({id: this.id, name: this.name})
+
+            }
+        }
+
+    })
+
+
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>样式</title>
+    <!--<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .xieti {
+            font-style: italic;
+        }
+
+        .active {
+            /*letter中文间距  word-s英文间距*/
+            letter-spacing: 0.5em;
+
+            /*word-spacing: 0.5em;*/
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div id="cssApp">
+    <h1 class="red thin">传统样式</h1>
+    <!--从data中读取-->
+    <h1 :class="[red,thin]">单向绑定</h1>
+    <!--从style中读取-->
+    <h1 :class="[ 'red' , 'thin' ,flag?'active':'']">三元运算</h1>
+    <h1 :class="[ 'red' , 'thin' ,{'active':flag}]">另一种三元运算[对象形式]</h1>
+    <h1 :class="{'active':flag,red:true,thin:true}">[全对象形式]</h1>
+    <h1 :class="classObj">对象放data里</h1>
+</div>
+<!--导包的位置如何影响页面显示,,本地包部分功能失效-->
+<!--<script src="./lib/vue.js"/>-->
+<!--<script src="./lib/vue.pro.min.js"/>-->
+<script>
+    var app = new Vue({
+        el: '#cssApp',
+        data: {
+            flag: true,
+            red: 'red',
+            thin: 'thin',
+            //为啥 active: this.flag 就未定义
+            classObj: {active: "flag", red: true, thin: true}
+        },
+        methods: {},
+        create() {
+        }
+    })
+</script>
+
+</body>
+</html>

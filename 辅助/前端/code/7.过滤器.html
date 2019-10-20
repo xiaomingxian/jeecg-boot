@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="filterApp">
+    <p>
+        {{msg|replaceFilter('tt','ss')|filter2}}
+    </p>
+
+
+</div>
+<div id="app2">
+    {{msg|replaceFilter('tt','ss')|filter2}}
+    {{padStartMy()}}
+    {{padEndMy()}}
+
+</div>
+
+</body>
+<script>
+
+    //全局过滤器
+    //时间过滤器--见 6.demo.html
+    Vue.filter('replaceFilter', function (data, arg, arg2) {
+        //正则全局
+        return data.replace(/特/g, arg + arg2)
+    })
+    Vue.filter('filter2', function (data) {
+        //正则全局
+        return data + "~~~~~"
+    })
+
+    new Vue({
+        el: '#filterApp',
+        data: {
+            msg: '奥特曼,奥特曼,奥特曼'
+        },
+        methods: {}
+    })
+
+
+    new Vue({
+        el: '#app2',
+        data: {
+            msg: '奥特曼,奥特曼,奥特曼'
+        },
+        methods: {
+
+            padStartMy() {
+                return (10).toString().padStart(4, '0')
+            }
+            , padEndMy() {
+                return (10).toString().padEnd(4, '0')
+
+            }
+        },
+        //私有过滤器(局部过滤器)
+        filters: {
+            replaceFilter(data, arg, arg2) {
+                return data + " " + arg + " " + arg2
+            }
+        }
+
+    })
+
+
+</script>
+</html>
