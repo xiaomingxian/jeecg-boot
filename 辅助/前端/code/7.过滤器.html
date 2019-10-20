@@ -15,7 +15,7 @@
 
 </div>
 <div id="app2">
-    {{msg|replaceFilter('tt','ss')|filter2}}
+    <p v-fontweight="100" v-fontsize="50"> {{msg|replaceFilter('tt','ss')|filter2}}</p>
     {{padStartMy()}}
     {{padEndMy()}}
 
@@ -63,6 +63,19 @@
         filters: {
             replaceFilter(data, arg, arg2) {
                 return data + " " + arg + " " + arg2
+            }
+        },
+        //私有指令
+        directives: {
+            'fontweight': {
+                bind(el, size) {
+                    el.style.color = 'red'
+                    el.style.fontWeight = size.value
+                }
+            },
+            'fontsize':function(el, size) {
+                console.log('--------------'+size)
+                el.style.fontSize = parseInt(size.value) + "px"
             }
         }
 

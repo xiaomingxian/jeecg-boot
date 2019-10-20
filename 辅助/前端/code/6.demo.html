@@ -25,7 +25,8 @@
                 名字:<input type="text" class="form-control" v-model="name" @keyup.ll="add">
             </label>
             <input type="button" value="添加" class="btn btn-primary" @click="add">
-            关键字<input type="text" v-model="keywords" class="form-control" @mouseleave="search(keywords)">
+            关键字<input id="search" v-color="'blue'" v-focus type="text" v-model="keywords" class="form-control"
+                      @mouseleave="search(keywords)">
         </div>
     </div>
 
@@ -62,7 +63,27 @@
 
     //自定义按键
     Vue.config.keyCodes.ll=13
+    //自定义全局指令  在调用的时候 得加 v-
+    //参数1：指令名称；参数2：是一个对象，有一些指令相关的函数，这些函数可以在特定的阶段，执行相关的操作
+    //bind一加载到内存就([样式]可以绑定属性什么的)，inserted插入dom([行为]显示的时候用)
+    Vue.directive('focus', {
+        bind(el) {//当指令绑定到元素的时候会执行这个函数，只会执行一次
+            //每个函数，第一个参数都是el：el是原生的js对象
+            // el.focus()
+        },
+        inserted(el) {//inserted执行完毕后，元素插入到dom中时，会执行(只会执行一次)
+            el.focus()
+        },
+        updated() {//当Vnode更新的时候会执行，会触发多次
+        }
+    })
 
+    Vue.directive('color', {
+        bind(el,binding) {
+            // el.style.color = 'red'
+            el.style.color=binding.value
+        }
+    })
 
     //时间过滤器---第一个参数取值 为{{data|methodName}}  | 前面的数据
     Vue.filter('dateFilter', function (dateStr, parten = 'yyyy') {
@@ -80,7 +101,6 @@
             var mm = date.getMinutes()
             var ss = date.getSeconds()
             return `${year}年${mounth}月${day}日 ${hh}:${mm}:${ss}`
-
         }
 
     })
@@ -147,6 +167,10 @@
 
         }
     })
+
+
+    //进入页面，获取焦点 js远程写法
+    // document.getElementById("search").focus()
 
 
 </script>

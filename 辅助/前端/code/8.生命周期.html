@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <p id="t" @click="msg='hello change'">{{msg}}</p>
+</div>
+<script>
+    //模版：<div id='app'>...</div>
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        },
+        methods: {
+            test() {
+                return "test method"
+            }
+        },
+        beforeCreate() {//第一个生命周期，表示实例被完全创立之前会执行它(data和methods中的数据还没有初始化)
+            console.log('---------')
+        },
+        created() {//第二个生命周期，data和meyhods已经初始完毕//要操作data和methods中的数据最早只能在这个里面操作
+            console.log(this.msg + "  " + this.test())
+
+        },
+        beforeMount() {//第三个生命周期，表示模版已经在内存中编译完成，但尚未挂载(渲染到页面中)//不能获取页面数据
+            // console.log(document.getElementById('t').innerText)//或取到的是{{msg}}
+        },
+        mounted() {//第四个生命周期，实例创建期间的最后一个生命周期//内存中的模版已经真实的挂在到页面中，用户已经可以看到渲染好的页面了
+            console.log(document.getElementById('t').innerText)//或取到的是{{msg}}
+        },
+        beforeUpdate() {//运行期间的声明周期，data数据发生改变，但页面数据还并未修改
+            console.log('data中的数据：' + this.msg)
+            console.log('data中的数据：' + document.getElementById('t').innerText)
+        },
+        beforeDestroy() {//触发销毁，但是实例还未真正销毁，data,methods,过滤器,指令，自定义指令等都还可用
+        },
+        destroyed() {//组件已经完全被销毁，data,methods...都不可以
+
+        }
+    })
+</script>
+</body>
+</html>
