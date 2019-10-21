@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonp</title>
+    <script>
+        //node 服务运行方式  node 服务文件
+
+        /**
+         * jsonp原理理解：<script 方式访问服务器 服务器进行url解析 解析到具体的方法 进行执行返回可执行的js方法
+         * 页面上定义此方法进行数据接收
+         * @param data
+         */
+
+
+        function show(data) {
+            console.log(data)
+            // console.log('------callback method .....' + JSON.stringify(data))
+        }
+    </script>
+    <script src="http://localhost:3000/getscript?callback=show"></script>
+
+</head>
+
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-resource</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--resource依赖于vue-->
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="get" @click="getActionMy">
+    <input type="button" value="post" @click="postInfo">
+    <input type="button" value="jsonP" @click="jsonP">
+
+
+</div>
+
+
+</body>
+<script>
+    //vue-resource的方法(设置跟路径)    进行请求的时候 url前不能加/否则不生效
+    Vue.http.options.root='http://xxx.xx.xx'
+
+    var app = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            getActionMy() {
+                this.$http.get('http://vue.studyit.io/api/getlunbo').then((res) => {
+                    //res.body  或者 res.data
+                    console.log(':::::::::::' + res)
+                }).catch(err => {
+                    console.log('错误信息：' + JSON.stringify(err))
+
+                })
+            },
+            postInfo() {
+                //emulateJSON:true 设置提交的内容类型为 普通表答案数据格式
+                this.$http.post('http://vue.studyit.io/api/post', {}, {emulateJSON: true}).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log('post错误信息：' + JSON.stringify(err))
+                })
+            }, jsonP() {
+                this.$http.jsonp('http://vue.studyit.io/api/jsonp').then(res => {
+                    console.log('jsonp::' + JSON.stringify(res))
+                }).catch(err => {
+                    console.log('jsonp::err==' + JSON.stringify(err))
+                })
+            }
+        }
+    })
+
+</script>
+</html>
