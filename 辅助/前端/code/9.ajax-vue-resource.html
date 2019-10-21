@@ -21,6 +21,8 @@
 <script>
     //vue-resource的方法(设置跟路径)    进行请求的时候 url前不能加/否则不生效
     Vue.http.options.root='http://xxx.xx.xx'
+    //全局配置 emulateJSON (post方式使用)
+    Vue.http.options.emulateJSON = true
 
     var app = new Vue({
         el: '#app',

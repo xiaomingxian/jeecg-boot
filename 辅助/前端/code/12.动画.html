@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--第三方效果-->
+    <link rel='stylesheet' href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
+
+    <!--略。。。。。。。。。。。。。。。。。。。-->
+
+    <style>
+        /**
+        时间点，进入与结束的两个时间点,设置透明度0
+         */
+        .v-enter, .v-leave-to {
+            opacity: 0;
+            transform: translateX(80px); /**初始位置*/
+        }
+
+        /**
+        入场与出场动画，持续时间 ease效果
+         */
+        .v-enter-active, .v-leave-active {
+            transition: all 2s ease;
+        }
+
+
+        /**
+       自定义前缀
+        */
+        .my-enter, .my-leave-to {
+            opacity: 0;
+            transform: translateX(80px) translateY(80px); /**初始位置*/
+        }
+
+        /**
+       自定义前缀   入场与出场动画，持续时间 ease效果
+         */
+        .my-enter-active, .my-leave-active {
+            transition: all 2s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <input type="button" value="切换1" @click="isShow=!isShow"/>
+
+
+    <!--动画效果得用它包裹-->
+    <transition>
+        <h3 v-if="isShow">Something...</h3>
+
+    </transition>
+
+    <!--修改v-前缀-->
+    <hr>
+    <input type="button" value="切换2" @click="isShow2=!isShow2"/>
+
+
+    <!--前缀为my 没有name属性默认v-与上一个共用样式-->
+    <transition name="my">
+        <h3 v-if="isShow2">Something...</h3>
+
+    </transition>
+    <hr>
+    <!--第三方-->
+    <input type="button" value="切换3" @click="isShow3=!isShow3"/>
+
+
+    <!--前缀为my 没有name属性默认v-与上一个共用样式-->
+    <!--<transition enter-active-class="animated wobble" leave-active-class="animated zoomln">-->
+    <transition enter-active-class="wobble" leave-active-class="zoomln" :duration="5000">
+        <!--<h3 v-if="isShow3">Something...</h3>-->
+        <h3 v-if="isShow3" class="animated">Something...</h3>
+
+    </transition>
+
+
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isShow: false,
+            isShow2: false,
+            isShow3: false,
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>

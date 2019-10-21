@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--组件从代码角度 模块是业务角度-->
+</head>
+<body>
+<div id="app">
+
+    <h4>第一种方式</h4>
+
+    <my-zu-jian></my-zu-jian>
+    <niming></niming>
+    <hr>
+    <type2></type2>
+    <hr>
+    <type3></type3>
+</div>
+
+<template id="type3">
+    <div>
+        <h4>type3(选择器定位)</h4>
+    </div>
+</template>
+
+<script>
+
+    //组件只能有唯一的跟元素
+
+    //1.创建全局组件
+    var z1 = Vue.extend({
+        template: '<h3>这是使用extend创建的组件</h3>'
+    })
+    //2.(组件名称,创建出来的组件模板对象)   引用的时候驼峰改横线 / 小写直接用
+    Vue.component('myZuJian', z1)
+
+
+    //匿名格式
+    Vue.component('niming', Vue.extend({
+        template: '<h3>匿名格式创建</h3>'
+    }))
+    //方式2
+    Vue.component('type2', {
+        template: '<h3>方式2</h3>'
+    })
+    //方式3
+    Vue.component('type3', {
+        template: '#type3'
+    })
+
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {}
+    })
+</script>
+</body>
+</html>
