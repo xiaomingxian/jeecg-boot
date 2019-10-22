@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>私有组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+</head>
+<body>
+<div id="app">
+
+    <login></login>
+    <zu-jian2></zu-jian2>
+
+</div>
+
+<template id="private">
+    <div>
+        <h4>私有组件2</h4>
+    </div>
+</template>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        components: {//私有组件
+            login: {
+                template: "<h4>私有组件</h4>"
+            },
+            zuJian2: {
+                template: '#private'
+            }
+
+        },
+        //声明周期相关
+        beforeCreate() {
+        },
+        created() {
+        },
+        beforeMount() {
+        },
+        mounted() {
+        },
+        beforeUpdate() {
+        },
+        updated() {
+        },
+        beforeDestroy() {
+        },
+        destroyed() {
+        }
+
+    })
+</script>
+</body>
+</html>

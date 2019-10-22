@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件传值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+    <son1 v-bind:parentMsg="msg2"></son1>
+    <!--自定义事件绑定-->
+    <son2 @func="fatherMethod"></son2>
+
+</div>
+<template id="son2">
+    <div>
+        <button @click="myClic">调用父组件方法</button>
+
+    </div>
+</template>
+<script>
+    var son2 = {
+        template: '#son2',
+        data() {
+            return {
+                sonMsg: {name: 'tom', age: 18}
+            }
+        },
+        methods: {
+            myClic() {
+                //emit：触发，调用
+                this.$emit('func', 123, this.sonMsg)
+            }
+        }
+    }
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            msg2: 'father data',
+            sonMsg: ''
+        },
+        methods: {
+            fatherMethod(data1, data2) {
+                console.log('--->调用了父组件的方法，参数1：' + data1 + ',参数2：' + JSON.stringify(data2))
+                this.sonMsg = data2
+
+            }
+        },
+        components: {
+            //data中的数据可读写//props中的数据只读
+            son1: {
+                props: ['parentMsg'],//把父组件传过来的属性先定义一下,
+                template: '<h4>son1---{{parentMsg}}</h4>'
+            },
+            son2
+        }
+    })
+</script>
+
+</body>
+</html>

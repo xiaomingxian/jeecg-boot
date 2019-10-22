@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件中的data</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <my-com></my-com>
+    <hr>
+    <h4>切换方式1 if else</h4>
+
+    <!--阻止默认跳转行为-->
+    <a href="" @click.prevent="login">登录</a>
+    <a href="" @click.prevent="register">注册</a>
+
+    <login v-if="flag"></login>
+    <register v-else="flag"></register>
+
+    <hr>
+    <h4>切换方式2 使用componet方式</h4>
+    <!--阻止默认跳转行为-->
+    <a href="" @click.prevent="comId='login'">登录</a>
+    <a href="" @click.prevent="comId='register'">注册</a>
+
+    <component :is="comId"></component>
+</div>
+<script>
+
+    Vue.component('myCom', {
+        template: '<h4>组件中的data{{msg}}</h4>',
+        //组件的data要求是一个方法 得返回一个对象
+        data() {
+            return {
+                msg: ' data in componet'
+            }
+        },
+        methods: {}
+    })
+    Vue.component('login', {
+        template: '<h4>登录组件</h4>',
+        data() {
+            return {
+                msg: ' data in componet'
+            }
+        }
+    })
+
+    Vue.component('register', {
+        template: '<h4>组册组件</h4>',
+        data() {
+            return {
+                msg: ' data in componet'
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            flag: true,
+            comId:'login'
+        },
+        methods: {
+            login() {
+                this.flag = true
+            }, register() {
+                this.flag = false
+            }
+        }
+    })
+</script>
+</body>
+</html>

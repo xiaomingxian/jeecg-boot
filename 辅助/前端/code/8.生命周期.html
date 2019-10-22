@@ -41,6 +41,8 @@
             console.log('data中的数据：' + this.msg)
             console.log('data中的数据：' + document.getElementById('t').innerText)
         },
+        updated() {
+        },
         beforeDestroy() {//触发销毁，但是实例还未真正销毁，data,methods,过滤器,指令，自定义指令等都还可用
         },
         destroyed() {//组件已经完全被销毁，data,methods...都不可以

@@ -3,3 +3,7 @@ mvvm：m(model) v(view) vm(view与model交互)
 捕获：从外到内
 
 
+组件：
+    <component>
+    <template>
+    <transition>动画相关
