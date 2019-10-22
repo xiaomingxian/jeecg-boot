@@ -21,6 +21,15 @@
     </div>
 </template>
 <script>
+    /**
+     * 子组件调用父组件数据 属性绑定+props:['xxx']
+     * 子组件调用父组件方法 事件绑定+子组件触发调用 this.$emit('xxxx',参数...)
+     * 父组件使用子组件数据 通过子组件调用父组件方法进行数据传递
+     * @type {{template: string, data(): *, methods: {myClic(): void}}}
+     */
+
+
+
     var son2 = {
         template: '#son2',
         data() {
