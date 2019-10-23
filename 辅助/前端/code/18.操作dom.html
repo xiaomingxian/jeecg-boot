@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom操作</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="app">
+    <input type="button" class="btn btn-primary" value="显示dom元素" @click="show">
+    <div id="test" ref="tt">哈哈哈哈哈</div>
+    <c1 ref="t1"></c1>
+</div>
+<template id="t1">
+    <div></div>
+</template>
+<script>
+
+
+    var t1 = {
+        template: '#t1',
+        data() {
+            return {
+                name: 'tom'
+            }
+        },
+        methods: {
+            show2(data) {
+                console.log('====----====>:我是子组件' + data)
+
+                return '子组件返回数据'
+            }
+        }
+    }
+
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            c1: t1
+        },
+        methods: {
+            show() {
+                var d = this.$refs.tt.innerText
+                console.log('------->' + d)
+
+                console.log('====>子组件data:' + this.$refs.t1.name)
+                console.log('====>子组件方法：' + this.$refs.t1.show2('i am father'))
+            }
+        }
+    })
+</script>
+</body>
+</html>

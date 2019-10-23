@@ -7,3 +7,10 @@ mvvm：m(model) v(view) vm(view与model交互)
     <component>
     <template>
     <transition>动画相关
+
+
+路由：
+    前端路由：对于单页面程序来说，主要通过URL中的hash(#)来实现不同页面的切换，hash有一个特点：http中不回包含hash相关的内容，
+            所以，单页面的跳转主要用hash实现
+            eg:http://www.baidu.com#login不会再次发请求只是在页面间跳转
+    后端路由：所有的超链接都是url地址，所有的url地址都对应服务器上对应的资源

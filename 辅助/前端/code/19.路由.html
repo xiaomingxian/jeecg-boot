@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--1 引入路由包-->
+    <script src="https://cdn.staticfile.org/vue-router/2.7.0/vue-router.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+    <router-view></router-view>
+
+</div>
+<script>
+
+    var register = {
+        template: '<h4>注册组件</h4>'
+    }
+
+    //2 创建一个路由对象，当倒入 router包后，在window 全局对象中，就有了一个路由后在函数 VueRouter
+    var router = new VueRouter({
+        // mode: 'history',
+        routers: [//路由匹配规则
+            //    每个路由规则，都是一个对象，必须有两个属性：
+            //    属性1 path,表示监听哪个路由链接地址
+            //    属性2 component对象
+            {path: '/login', component: {template: '<h3>登录组件</h3>>'}},
+            {path: '/register', component: register}
+
+        ]
+    })
+
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router//将路由规则对象注册到vm实例上，监听url变化，进行对应展示
+    })
+</script>
+
+</body>
+</html>
