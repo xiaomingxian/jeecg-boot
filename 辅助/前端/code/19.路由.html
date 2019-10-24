@@ -3,34 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>路由</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <!--1 引入路由包-->
-    <script src="https://cdn.staticfile.org/vue-router/2.7.0/vue-router.min.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
 </head>
+<style>
+    .router-link-active {
+        color: red;
+        font-weight: 800;
+        font-style: italic;
+    }
+
+    .myActive {
+        color: red;
+        font-weight: 800;
+        font-style: italic;
+    }
+</style>
 <body>
 
 <div id="app">
+
+    <a href="#/login">登录</a>
+    <a href="#/register">注册</a>
+
+
+    <router-link to="/login" tag="span">login</router-link>
+    <router-link to="/register">register</router-link>
+
+
+    <br>
+    <router-link to="/param?id=10">参数传递</router-link>
+
+    <br>
+    <router-link to="/param2/11/22">参数传递2</router-link>
+
 
     <router-view></router-view>
 
 </div>
 <script>
 
+
     var register = {
         template: '<h4>注册组件</h4>'
     }
 
+    var param = {
+        template: '<h4>参数传递---{{$route.query.id}}</h4>',
+        created() {//生命周期
+            console.log(this.$route)
+        }
+    }
+
+    var param2 = {
+        template: '<h4>参数传递2占位符---{{$route.params.id}}--{{$route.params.name}}</h4>',
+        created() {//生命周期
+            console.log(this.$route)
+        }
+    }
+
+
     //2 创建一个路由对象，当倒入 router包后，在window 全局对象中，就有了一个路由后在函数 VueRouter
-    var router = new VueRouter({
-        // mode: 'history',
-        routers: [//路由匹配规则
+    const router = new VueRouter({
+        //routes而不是routers
+        routes: [//路由匹配规则
             //    每个路由规则，都是一个对象，必须有两个属性：
             //    属性1 path,表示监听哪个路由链接地址
             //    属性2 component对象
-            {path: '/login', component: {template: '<h3>登录组件</h3>>'}},
-            {path: '/register', component: register}
-
-        ]
+            // {path: '/', component: register},
+            {path: '/', redirect: '/login'},
+            {path: '/login', component: {template: '<h3>登录组件</h3>'}},
+            {path: '/register', component: register},
+            {path: '/param', component: param},
+            {path: '/param2/:id/:name', component: param2},//制定路由规则
+        ],
+        //修改默认激活属性//也可以改成第三方的名字 eg:bootstrap
+        linkActiveClass: 'myActive'
     })
 
     new Vue({
@@ -39,6 +90,8 @@
         methods: {},
         router: router//将路由规则对象注册到vm实例上，监听url变化，进行对应展示
     })
+
+
 </script>
 
 </body>

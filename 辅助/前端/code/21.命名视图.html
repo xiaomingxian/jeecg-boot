@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>命名视图</title>
+
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+</head>
+<style>
+
+    html,body {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,h3,h4 { /**h1边距*/
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+    }
+
+
+    .head {
+        background-color: palegreen;
+        height: 80px;
+    }
+
+    .coniter {
+        display: flex; /**水平对齐*/
+        height: 800px;
+    }
+
+    .left {
+        background-color: lightpink;
+        flex: 2; /**占 2/10*/
+    }
+
+    .main {
+        background-color: lightgreen;
+        flex: 8;
+    }
+</style>
+<body>
+
+<div id="app">
+
+    <router-view class="head"></router-view>
+    <div class="coniter">
+        <router-view name="left" class="left"></router-view>
+        <router-view name="main" class="main"></router-view>
+    </div>
+</div>
+<script>
+    var header = {template: '<h3>Header</h3>'}
+    var left = {template: '<h4>left</h4>'}
+    var main = {template: '<h4>main</h4>'}
+
+    var router = new VueRouter({
+        routes: [
+            {
+                path: '/', components: {
+                    default: header,
+                    left: left,
+                    main: main
+                }
+            }
+        ]
+    })
+
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router
+    })
+</script>
+</body>
+</html>

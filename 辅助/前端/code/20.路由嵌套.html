@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由嵌套</title>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <router-link to="/c1">组件1</router-link>
+
+    <router-view></router-view>
+</div>
+<template id="c1">
+    <div>
+        <h4>组件1</h4>
+        <router-link to="/login">登录</router-link>
+        <router-link to="/c1/register">注册</router-link>
+    </div>
+</template>
+</body>
+<script>
+
+    c1 = {
+        template: '#c1'
+    }
+
+    c11 = {
+        template: '<h4>登录</h4>'
+    }
+
+    c12 = {
+        template: '<h4>注册</h4>'
+    }
+
+    var router = new VueRouter({
+        routes: [
+            {
+                path: '/c1', components: c1
+                , children: [
+                    {path: '/login', component: c11},
+                    {path: 'register', component: c12}//不带/ 路径会变成：/c1/register
+                ]
+
+            },
+        ]
+    })
+
+
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router
+    })
+</script>
+</html>
