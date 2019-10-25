@@ -7,7 +7,7 @@ import $ from 'jquery'
 //隔行变色
 $(function () {
     //odd偶数，even奇数
-    $('li:odd').css('backgroundColor', 'lightblue')
+    $('li:odd').css('backgroundColor', 'red')
     $('li:even').css('backgroundColor', function () {//另一种方式
         return '#' + 'D97634'
     })

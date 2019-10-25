@@ -7,7 +7,8 @@ module.exports = {
     entry: path.join(__dirname, './src/main.js'),//入口，打那个包
     output: {
         path: path.join(__dirname, './src/dist'),
-        filename: 'main.js'
+        filename: 'main2.js'
     }
 }
 //直接运行webpack打包
+//

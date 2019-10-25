@@ -1,3 +1,21 @@
 src下：npm init -y  #生成package.json
 npm i jquery -S    #安装jquery ===> src/node_modules/jquery
 webpack打包js webpack ./scr/main.js ./dist/bundle.js  #webpack 源文件地址 目标文件地址
+
+
+/**
+    常用命令解释
+        npm i module_name  -S  = >  npm install module_name --save    写入到 dependencies 对象
+
+        npm i module_name  -D  => npm install module_name --save-dev   写入到 devDependencies 对象
+
+        npm i module_name  -g  全局安装
+**/
+本地安装webpack-dev-server 自动打包
+    npm i webpack-dev-server -D #安装到本地 当前目录下得有pack.json   -D/-s
+
+    package.json中自定义命令    "dev": "webpack-dev-server --open --contentBase ./ --hot"
+
+    webpack-dev-server 想要正常运行，必须在本地项目中安装webpack
+    webpack-dev-server 自动生成的bundles.js(名字自定义)并没有放到实际的物理磁盘上，而是直接托管到电脑的内存中(为了快，热部署放到磁盘体验好点)，所以不能看到实际的文件
+        可以认为是在项目的跟目录下放入了虚拟的bundle.js
