@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--1 引入路由包-->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+
+</head>
+<body>
+<div id="app">
+
+    <input v-model="data1">
+    <br>
+
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register">注册</router-link>
+    <router-view></router-view>
+
+</div>
+<script>
+
+
+    var register = {
+        template: '<h4>注册组件</h4>'
+    }
+    var login = {
+        template: '<h4>登录组件</h4>'
+    }
+
+    var router = new VueRouter({
+        routes: [
+            {path: '/login', component: login},
+            {path: '/register', component: register},
+        ]
+    })
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            data1: ''
+        },
+        methods: {},
+        router: router,
+        watch: {
+            'data1'(newVal, oldVal) {
+                console.log(newVal, oldVal)
+            },
+            '$route.path'(newV, oldV) {//监听路由地址变化
+                console.log('路由监听', newV, oldV)
+            }
+        },
+    })
+
+
+</script>
+</body>
+</html>

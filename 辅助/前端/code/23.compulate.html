@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+</head>
+<body>
+<div id="app">
+
+    <input v-model="data1">
+    <br>
+    第一次调用[执行方法]：{{compulateValue}}
+    <br>
+    第二次调用[使用缓存]：{{compulateValue}}
+
+</div>
+<script>
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            data1: ''
+        },
+        methods: {},
+        computed: {
+            //可以定义一些属性，这些属性叫做计算属性，计算属性的本质就是一种方法，使用的时候直接使用名称，直接当作属性来使用，并不会把计算属性当作方法去调用
+            //注意：只要计算属性内部 所用到的data发生了变化，就会触发重新计算
+            'compulateValue'() {
+                console.log('-------- 方法执行  --------')
+                return this.data1 + '  get by   compulate '
+            }
+
+
+        }
+    })
+
+
+</script>
+</body>
+</html>

@@ -14,3 +14,33 @@ mvvm：m(model) v(view) vm(view与model交互)
             所以，单页面的跳转主要用hash实现
             eg:http://www.baidu.com#login不会再次发请求只是在页面间跳转
     后端路由：所有的超链接都是url地址，所有的url地址都对应服务器上对应的资源
+
+事件：keyup  watch监听(vue方法)
+
+
+watch,computed,methods区别
+    watch:一个对象，键是需要观察的表达式，值是回掉函数，主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑操作，
+        可以看作是computed+methods
+    computed:必须返回数据，结果会被缓存，除非依赖的响应式属性发生变化才会重新计算，主要当作属性来使用
+    methods:方法表示一个具体的操作，主要写业务逻辑
+
+
+nrm:只是单纯的提供了下载包的地址，但是装包使用的工具还是 npm
+    npm install nrm -g #全局安装nrm
+    nrm ls #查看维护的常用的镜像地址
+    nrm use npm/或者其他 #切换使用的镜像源
+
+
+webpack:基于整个项目进行构建
+    网页常见静态资源：
+        js:.js/.jsx/.coffee/.ts(TypeScript)
+        css:.css/.less/.sass/.scaa
+        Images:.jpg/.png/.gif/.bmp/.svg
+        Fonts:.svg/.ttf/.eot/.woff/.woff2
+        模版文件:.ejs/.jade/.vue(webpack中定义组件的方式)
+    网页中引用的静态资源多了后存在的问题：
+        1 网页加载速度慢，因为会发起很多二次请求(加载Script时遇到请求[样式，图片等])
+        2 要处理错综复杂的依赖关系
+    解决：
+        1 网页加载慢 => 合并(减少二次请求),压缩(提高加载速度)，精灵图(小图片合并成一张),图片的base64编码(scr指向base64编码在初始化时图片就会直接下载下来)
+        2 依赖复杂。 => requireJs,webpack
