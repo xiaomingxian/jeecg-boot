@@ -3,7 +3,6 @@
 //导入jquery--$:变量名;jquery:nodel_model中的jquery模块
 //import ** from ** 是es6导入模块的方式
 import $ from 'jquery'
-
 //隔行变色
 $(function () {
     //odd偶数，even奇数

@@ -19,3 +19,6 @@ webpack打包js webpack ./scr/main.js ./dist/bundle.js  #webpack 源文件地址
     webpack-dev-server 想要正常运行，必须在本地项目中安装webpack
     webpack-dev-server 自动生成的bundles.js(名字自定义)并没有放到实际的物理磁盘上，而是直接托管到电脑的内存中(为了快，热部署放到磁盘体验好点)，所以不能看到实际的文件
         可以认为是在项目的跟目录下放入了虚拟的bundle.js
+
+
+npm i html-webpack-plugin -D #页面打包插件下载 根据html页面在内存中生成页面
